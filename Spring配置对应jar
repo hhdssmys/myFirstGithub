@@ -1,3 +1,8 @@
 spring-core 5.0.8.    ,对应core,jcl
 spring-beans 5.0.8.   ,对应beans
 spring-context 5.0.8. ,对应context,aop,expression,可能由于依赖，当导入spring-context时，自动导入spring-core与spring-beans所需jar
+
+java配置：
+    @Configuration
+    @Bean
+全局配置使用java配置(数据库配置,MVC配置),业务Bean的配置使用注解配置(@Service,@Component,@Repository,@Controller)
