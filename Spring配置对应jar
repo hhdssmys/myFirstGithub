@@ -1,6 +1,8 @@
-spring-core 5.0.8.    ,对应core,jcl
-spring-beans 5.0.8.   ,对应beans
-spring-context 5.0.8. ,对应context,aop,expression,可能由于依赖，当导入spring-context时，自动导入spring-core与spring-beans所需jar
+spring-core 5.0.8.RELEASE    ,对应core,jcl
+spring-beans 5.0.8.RELEASE   ,对应beans
+spring-context 5.0.8.RELEASE ,对应context,aop,expression,可能由于依赖，当导入spring-context时，自动导入spring-core与spring-beans所需jar
+spring-aop   5.0.8.RELEASE ,对应aop,可能由于依赖，当导入spring-context时，自动导入spring-core与spring-beans所需jar
+aspectjweaver   1.8.13,对应aspectjweaver-1.8.13
 
 java配置：
     @Configuration
