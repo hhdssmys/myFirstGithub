@@ -1,0 +1,2 @@
+cli依赖npm，npm依赖node.js
+具体安装步骤（从node.js -> npm ->cli）：https://www.cnblogs.com/laizhouzhou/p/8027908.html(侵删)
