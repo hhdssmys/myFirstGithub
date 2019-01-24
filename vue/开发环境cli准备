@@ -1,2 +1,6 @@
 cli依赖npm，npm依赖node.js
 具体安装步骤（从node.js -> npm ->cli）：https://www.cnblogs.com/laizhouzhou/p/8027908.html(侵删)
+
+根据上文所述cli创建vue项目,在npm run dev 时会报错,经查看是webpack 的新版本的BUG,卸载新版本，安装旧版本即可
+
+npm 命令 ：https://www.jianshu.com/p/dee4a84e5961
