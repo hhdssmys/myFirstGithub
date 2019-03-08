@@ -1,0 +1,23 @@
+1.构造方法如下：
+     ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, 
+                   BlockingQueue<Runnable> workQueue, RejectedExecutionHandler handler) 
+2.参数说明：
+    1）corePoolSize：	  线程池维护线程的最少数量。线程池至少会保持改数量的线程存在，即使没有任务可以处理。（注意：这里说的至少是指线程达到这个数量后，即使有空闲的线程也不会释放，而不是说线程池创建好之后就会初始化这么多线程）
+    2）maximumPoolSize：线程池维护线程的最大数量。线程池最多可创建的线程数，即使队列中的任务满了线程数量也不会超过maximumPoolSize
+    3）keepAliveTime：	线程池维护线程所允许的空闲时间。当线程池中的线程数量大于 corePoolSize时，超过corePoolSize的线程如果空闲时间超过keepAliveTime，线程将被终止
+    4）unit：         	线程池维护线程所允许的空闲时间的单位，和keepAliveTime配合使用
+    5）workQueue：    	线程池所使用的缓冲队列。ArrayBlockingQueue，LinkedBlockingQueue，SynchronousQueue，PriorityBlockingQueue
+    6）handler：      	线程池对拒绝任务的处理策略。AbortPolicy，CallerRunsPolicy，DiscardOldestPolicy，DiscardPolicy，自定义
+3.各类型队列说明
+    1）ArrayBlockingQueue：	有界队列，FIFO，需要指定队列大小，如果队列满了，会触发线程池的RejectedExecutionHandler逻辑
+    2）LinkedBlockingQueue：无界队列，FIFO，可以无限向队列中添加任务，直到内存溢出
+    3）SynchronousQueue： 	一种阻塞队列，其中每个 put 必须等待一个 take，反之亦然。同步队列没有任何内部容量，甚至连一个队列的容量都没有。可以简单理解为是一个容量只有1的队列。Executors.newCachedThreadPool使用的是这个队列
+    4）PriorityBlockingQueue：	优先级队列，线程池会优先选取优先级高的任务执行，队列中的元素必须实现Comparable接口
+ 4.RejectedExecutionHandler类型
+    1）AbortPolicy：	线程池默认的策略，如果元素添加到线程池失败，会抛出RejectedExecutionException异常
+    2）DiscardPolicy：	如果添加失败，则放弃，并且不会抛出任何异常
+    3）DiscardOldestPolicy：	如果添加到线程池失败，会将队列中最早添加的元素移除，再尝试添加，如果失败则按该策略不断重试
+    4）CallerRunsPolicy：	如果添加失败，那么主线程会自己调用执行器中的execute方法来执行改任务
+    5）自定义： 如果觉得以上几种策略都不合适，那么可以自定义符合场景的拒绝策略。需要实现RejectedExecutionHandler接口，并将自己的逻辑写在rejectedExecution方法内。
+  以上转载于 ThreadPoolExecutor简介：https://blog.csdn.net/jgteng/article/details/54409887
+  线程池的拒绝策略：RejectedExecutionHandler https://blog.csdn.net/jgteng/article/details/54411423
