@@ -1,7 +1,19 @@
 一、基本参数简介及创建对象new ThreadPoolExecutor（...）
 1.构造方法如下：
+     ThreadPoolExecutor的所有构造函数都是对七个参数构造的调用，添加一些默认值
+     //五个参数的构造函数
+     public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize,long keepAliveTime,TimeUnit unit,
+                               BlockingQueue<Runnable> workQueue)
+     //六个参数的构造函数-1
+     public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
+                          BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory)
+     //六个参数的构造函数-2
      ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, 
-                   BlockingQueue<Runnable> workQueue, RejectedExecutionHandler handler) 
+                          BlockingQueue<Runnable> workQueue, RejectedExecutionHandler handler) 
+     //七个参数的构造函数
+     public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize,long keepAliveTime,TimeUnit unit,
+                          BlockingQueue<Runnable> workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler)                 
+              
 2.参数说明：
     1）corePoolSize：	  线程池维护线程的最少数量。线程池至少会保持改数量的线程存在，即使没有任务可以处理。（注意：这里说的至少是指线程达到这个数量后，即使有空闲的线程也不会释放，而不是说线程池创建好之后就会初始化这么多线程）
     2）maximumPoolSize：线程池维护线程的最大数量。线程池最多可创建的线程数，即使队列中的任务满了线程数量也不会超过maximumPoolSize
@@ -100,7 +112,9 @@
       转载于http://www.cnblogs.com/zedosu/p/6665306.html
  五、BlockingQueue<Runnable>排队策略
     见本节--阻塞队列BlockingQueue<Runnable>
- 六、ThreadPoolExecutor源码分析（待续）
+ 六、ThreadFactory线程工厂
+    见本节--ThreadFactory线程工厂
+ 七、ThreadPoolExecutor源码分析（待续）
   
   
   
