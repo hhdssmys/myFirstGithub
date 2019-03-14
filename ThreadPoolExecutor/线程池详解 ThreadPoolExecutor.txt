@@ -1,3 +1,4 @@
+一、基本参数简介及创建对象new ThreadPoolExecutor（...）
 1.构造方法如下：
      ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, 
                    BlockingQueue<Runnable> workQueue, RejectedExecutionHandler handler) 
@@ -21,3 +22,101 @@
     5）自定义： 如果觉得以上几种策略都不合适，那么可以自定义符合场景的拒绝策略。需要实现RejectedExecutionHandler接口，并将自己的逻辑写在rejectedExecution方法内。
   以上转载于 ThreadPoolExecutor简介：https://blog.csdn.net/jgteng/article/details/54409887
   线程池的拒绝策略：RejectedExecutionHandler https://blog.csdn.net/jgteng/article/details/54411423
+ 
+ 二、任务添加及执行策略
+ 1.向ThreadPoolExecutor添加任务
+ 通过ThreadPoolExecutor.execute(Runnable command)方法即可向线程池内添加一个任务;
+ 例如：ThreadPoolExecutor.execute(new Runnable(){
+          @Override
+            public void run() {
+            ...执行逻辑
+            }
+     })
+  2.ThreadPoolExecutor的策略
+  当一个任务被添加进线程池时，执行策略：
+     1）线程数量未达到corePoolSize，则新建一个线程(核心线程)执行任务
+     2）线程数量达到了corePools，则将任务移入队列等待
+     3）队列已满，新建线程(非核心线程)执行任务
+     4）队列已满，总线程数又达到了maximumPoolSize，就会由(RejectedExecutionHandler)执行拒绝策略
+ 
+ 三、常见四种线程池
+  1.CachedThreadPool  可缓存线程池
+  源码：
+  public static ExecutorService newCachedThreadPool() {
+        return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                      60L, TimeUnit.SECONDS,
+                                      new SynchronousQueue<Runnable>());
+    }
+  根据源码可以看出：
+         1）这种线程池内部没有核心线程，线程的数量是有没限制的（其实是整数最大值，不过已经超出机器承受范围，就当做机器最大数即可）。
+         2）在创建任务时，若有空闲的线程时则复用空闲的线程，若没有则新建线程。
+         3）没有工作的线程（闲置状态）在超过了60S还不做事，就会销毁 
+  创建方法：ExecutorService mCachedThreadPool = Executors.newCachedThreadPool();
+  
+  2.FixedThreadPool   定长线程池
+  源码：
+     public static ExecutorService newFixedThreadPool(int nThreads) {
+          return new ThreadPoolExecutor(nThreads, nThreads,
+                                        0L, TimeUnit.MILLISECONDS,
+                                        new LinkedBlockingQueue<Runnable>());
+     }
+     
+  根据源码可以看出：
+     1）该线程池的最大线程数等于核心线程数，所以在默认情况下，该线程池的线程不会因为闲置状态超时而被销毁（都是核心线程,该闲置状态指非核心线程的，核心线程开启闲置超时才会回收allowCoreThreadTimeOut=true）。
+     2）如果当前线程数小于核心线程数，并且也有闲置线程的时候提交了任务，这时也不会去复用之前的闲置线程，会创建新的线程去执行任务。如果当前执行任务数大于了核心线程数，大于的部分就会进入队列等待。等着有闲置的线程来执行这个任务。
+  3.SingleThreadPool  一个线程的线程池
+  源码：
+       public static ExecutorService newSingleThreadExecutor() {
+         return new FinalizableDelegatedExecutorService
+             (new ThreadPoolExecutor(1, 1,
+                                     0L, TimeUnit.MILLISECONDS,
+                                     new LinkedBlockingQueue<Runnable>()));
+      }
+   根据源码可以看出：
+          1）有且仅有一个工作线程执行任务（corePoolSize=maximumPoolSize=1，且为核心线程,无非核心线程）
+          2）所有任务按照指定顺序执行，即遵循队列的入队出队规则
+  4.ScheduledThreadPool
+  源码
+       public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
+         return new ScheduledThreadPoolExecutor(corePoolSize);
+     }
+     public ScheduledThreadPoolExecutor(int corePoolSize) {
+         super(corePoolSize, Integer.MAX_VALUE,
+               DEFAULT_KEEPALIVE_MILLIS, MILLISECONDS,
+               new DelayedWorkQueue());
+     }
+   根据源码可以看出：
+     DEFAULT_KEEPALIVE_MILLIS就是默认10L，这里就是10秒。这个线程池有点像是吧CachedThreadPool和FixedThreadPool 结合了一下。
+
+     不仅设置了核心线程数，最大线程数也是Integer.MAX_VALUE。
+     这个线程池是上述4个中为唯一个有延迟执行和周期执行任务的线程池。
+  
+  注意：
+  1）在使用包含无界队列LinkedBlockingQueue的时候，要注意是否会导致队列不断增长，导致内存溢出。（无界队列，无大小限制）
+  2）使用SynchronousQueue的时候要注意是否会导致线程数不断增长（CachedThreadPool线程池使用了同步队列,其没有核心线程全是非核心线程，线程数没有限制为最大整数值，超出机器线程承受值）
+ 四、ThreadPoolExecutor源码分析（待续）
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
