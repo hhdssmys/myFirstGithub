@@ -99,7 +99,7 @@
  四、自定义线程池
       转载于http://www.cnblogs.com/zedosu/p/6665306.html
  五、BlockingQueue<Runnable>排队策略
- [见本节--阻塞队列BlockingQueue<Runnable>](https://github.com/hhdssmys/myFirstGithub/blob/master/ThreadPoolExecutor/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97BlockingQueue%3CRunnable%3E)
+    见本节--阻塞队列BlockingQueue<Runnable>
  六、ThreadPoolExecutor源码分析（待续）
   
   
