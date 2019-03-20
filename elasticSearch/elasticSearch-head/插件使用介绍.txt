@@ -1,0 +1,5 @@
+文章转载于：https://www.cnblogs.com/xuwenjin/p/8792919.html
+
+数据浏览相关名词介绍：https://www.cnblogs.com/luxiaoxun/p/4869509.html
+基本查询页签使用：https://www.cnblogs.com/ljhdo/p/5040252.html
+复合查询页签使用：https://blog.csdn.net/bsh_csn/article/details/53908406　
