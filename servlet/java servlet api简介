@@ -1,0 +1,14 @@
+文章转载于：https://www.cnblogs.com/haimishasha/p/5609261.html#autoid-2-17-0
+java servlet API包含了两个软件包，十二个接口和九个类。
+
+软件包：javax.servlet
+
+　　 所包含的接口：RequestDispatcher；Servlet；ServletConfig；ServletContext；ServletRequest；ServletResponse；SingleThreadModel。
+
+　　 所包含的类：GenericServlet；ServletInputStream；ServletOutputStream；ServletException；UnavailableException。
+
+软件包：javax.servlet.http
+
+       所包含的接口：HttpServletRequest；HttpServletResponse；HttpSession；HttpSessionBindingListener；HttpSessionContext。
+
+       所包含的类：Cookie；HttpServlet；HttpSessionBindingEvent；HttpUtils。
