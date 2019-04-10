@@ -1,0 +1,35 @@
+交集 retainAll
+差集 removeAll
+并集 addAll
+
+## 【注意】：集合做交并差后会改变原有集合的值
+list与set因其特性（不允许同值存在），并集结果有差异
+public static void main(String[] args) {
+//		List<String> set1 = new ArrayList<>();
+//		List<String> set2 = new ArrayList<>();
+		
+		Set<String> set1 = new HashSet<>();
+        Set<String> set2 = new HashSet<>();
+ 
+        set1.add("a");
+        set1.add("b");
+        set1.add("c");
+ 
+        set2.add("c");
+        set2.add("d");
+        set2.add("e");
+        //交集
+//        System.out.println(set1.retainAll(set2));
+//        System.out.println(set1);
+//        System.out.println(set2);
+//        
+        //并集
+        System.out.println(set1.addAll(set2));
+        System.out.println(set1);
+        System.out.println(set2);
+        
+        //差集
+//        System.out.println(set1.removeAll(set2));
+//        System.out.println(set1);
+//        System.out.println(set2);
+	}
