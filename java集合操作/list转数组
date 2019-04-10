@@ -1,0 +1,5 @@
+List 提供了toArray的接口，所以可以直接调用转为object型数组
+    List<String> list = new ArrayList<String>();
+    Object[] array=list.toArray();
+String[] array = (String[]) list.toArray();上述方法存在强制转换时会抛异常，下面此种方式更推荐：可以指定类型
+String[] array=list.toArray(new String[list.size()]);
