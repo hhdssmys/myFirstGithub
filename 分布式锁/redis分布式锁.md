@@ -1,7 +1,7 @@
 #redis 分布式锁的实现  
 
 本锁采用 redis.setnx() 实现分布式锁，具体代码如下：  
-'  
+'''
 public class RedisDistributedLock {
 
     //单位ms
@@ -104,4 +104,4 @@ public class RedisDistributedLock {
     }
 
 }  
-'
+'''
