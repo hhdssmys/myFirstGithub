@@ -1,7 +1,7 @@
-#redis 分布式锁的实现  
+# redis 分布式锁的实现
 
 本锁采用 redis.setNX() 实现分布式锁，包括锁持有超时，获取锁超时等功能，具体代码如下：  
-```
+``` java
 public class RedisDistributedLock {
 
     //单位ms
