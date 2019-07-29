@@ -355,7 +355,13 @@ public class DataSourceSwitchInterceptor {
 </beans>
 ```  
 5. 尚未解决的问题  
-&ensp;&ensp;&ensp;&ensp;多数据源切换是成功了，但牵涉到事务呢？单数据源事务是ok的，但如果多数据源需要同时使用一个事务呢？这个问题有点头大，网络上有人提出用atomikos开源项目实现JTA分布式事务处理。你怎么看？
+&ensp;&ensp;&ensp;&ensp;多数据源切换是成功了，但牵涉到事务呢？单数据源事务是ok的，但如果多数据源需要同时使用一个事务呢？这个问题有点头大，网络上有人提出用atomikos开源项目实现JTA分布式事务处理。你怎么看？  
+6. 此次开发用到的知识点 
+ 1）枚举（用途含义）  
+ 2）自定义注解（范围）  
+ 3）ThreadLocal（并发知识）  
+ 4）spring-aop （用途及限制，同类间方法调用不起作用，因为调用的是this不是proxy）  
+ 5）AbstractRoutingDataSource 源码阅读  
 
 
 
