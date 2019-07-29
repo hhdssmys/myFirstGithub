@@ -1,3 +1,7 @@
+转载文章  
+[Spring(AbstractRoutingDataSource)实现动态数据源切换](https://blog.51cto.com/linhongyu/1615895)  
+[spring 动态切换数据源 多数据库](https://blog.csdn.net/laojiaqi/article/details/78964862)
+
 ## spring动态切换数据源
 1. 使用场景  
   1）项目A需实现数据同步到另一项目B数据库中，在不改变B项目的情况下，只好选择项目A中切换数据源，直接把数据写入项目B的数据库中。  
