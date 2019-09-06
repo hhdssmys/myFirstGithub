@@ -1,3 +1,6 @@
+[原理理解](https://www.cnblogs.com/pony1223/p/7847323.html)  
+[实战代码](https://blog.csdn.net/yhahaha_/article/details/81395397)  
+
 #### 一、 WebService的本质
 &emsp;&emsp;一句话：WebService是一种跨语言和跨平台的远程调用技术。  
 &emsp;&emsp;所谓跨编程语言和跨操作平台，就是说服务端程序采用java编写，客户端程序则可以采用其他编程语言编写，反之亦然！跨操作系统平台则是指服务端程序和客户端程序可以在不同的操作系统上运行。  
