@@ -1,3 +1,5 @@
 + [velocity基本使用](https://www.jianshu.com/p/98300c2df6c9)  
 - [《Apache Velocity用户指南》官方文档部分翻译（并发编程网）](http://ifeve.com/apache-velocity-dev/) / [CSDN 复刻](https://blog.csdn.net/xiang__liu/article/details/81160766)  
++ [apache模板引擎结合spring框架的简单使用（org.apache.velocity）](https://blog.csdn.net/qq_17089617/article/details/79112758)
+- [SpringMVC 集成velocity以及介绍velocity的基本使用语法](https://blog.csdn.net/weixin_40470497/article/details/79951169)  
 + [还缺与 mvc 框架的整体运用]()
