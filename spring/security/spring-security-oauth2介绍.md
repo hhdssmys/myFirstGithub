@@ -5,7 +5,7 @@
 配置spring security  
 
 #### security 是通过 责任链模式 遍历每一个过滤器的authenticate验证方法，一个不过就结束，每一个不同的过滤器都提供了类似的验证流程，
-#### 但是 oauth—token 验证是重写了容器的顶级身份认证接口，稍显不同，至少包括两部分（token生成 + token验证 ）   
+#### 但是 oauth—token 验证是重写了容器的顶级身份认证接口，稍显不同，至少包括两部分（token生成（身份验证通过） + token验证 ）   
 
 #### 简单说下 spring security oauth2 的认证思路。
 1. client 模式，没有用户的概念，直接与认证服务器交互，用配置中的客户端信息去申请 accessToken，客户端有自己的 client_id,client_secret 对应于用户的 username,password，而客户端也拥有自己的 authorities，当采取 client 模式认证时，对应的权限也就是客户端自己的 authorities。
