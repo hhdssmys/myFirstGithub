@@ -1,4 +1,14 @@
 #### 装载于 [从零开始的 Spring Security OAuth2](https://www.cnkirito.moe/Spring-Security-OAuth2-1/)
+使用oauth2保护你的应用，可以分为简易的分为三个步骤:  
+配置资源服务器  
+配置认证服务器  
+配置spring security  
+
+身份认证的主要功能有：  
+1. 信息对比，身份验证   
+2. 生成 token  
+
+
 
 #### 简单说下 spring security oauth2 的认证思路。
 1. client 模式，没有用户的概念，直接与认证服务器交互，用配置中的客户端信息去申请 accessToken，客户端有自己的 client_id,client_secret 对应于用户的 username,password，而客户端也拥有自己的 authorities，当采取 client 模式认证时，对应的权限也就是客户端自己的 authorities。
