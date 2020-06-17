@@ -1,6 +1,7 @@
 #### 转载于 [Spring Security(一)--Architecture Overview](https://www.cnkirito.moe/spring-security-1/)
 #### security ：身份验证 + 角色授权
-其中验证（用户信息对比）主要涉及的类为：  
+#### security 是通过 责任链模式 遍历每一个过滤器的authenticate验证方法，一个不过就结束，每一个不同的过滤器都提供了类似的验证流程  
+其中验证用户信息（用户信息的过滤器filter）的主要涉及的类为：    
 1. AuthenticationManager#authenticate() --调用--> ProviderManager#authenticate()  
 AuthenticationManager的实现类一般是ProviderManager  
 2. ProviderManager#authenticate()  --调用--> AuthenticationProvider#authenticate()  
