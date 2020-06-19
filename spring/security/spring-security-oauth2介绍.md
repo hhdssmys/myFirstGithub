@@ -1,5 +1,13 @@
-#### 装载于 [从零开始的 Spring Security OAuth2](https://www.cnkirito.moe/Spring-Security-OAuth2-1/)
-使用oauth2保护你的应用，可以分为简易的分为三个步骤:  
+#### 参考：    
+  [芋道 Spring Security OAuth2 入门](http://www.iocoder.cn/Spring-Security/OAuth2-learning/?vip)  
+  [从零开始的 Spring Security OAuth2（三）](https://www.cnkirito.moe/Spring-Security-OAuth2-3/)  
+  [从零开始的 Spring Security OAuth2（二）](https://www.cnkirito.moe/Spring-Security-OAuth2-2/)  
+  [芋道 Spring Boot 安全框架 Spring Security 入门](http://www.iocoder.cn/Spring-Boot/Spring-Security/?vip)  
+  [从零开始的 Spring Security OAuth2](https://www.cnkirito.moe/Spring-Security-OAuth2-1/)  
+#### Oauth2: 客户端 取得 用户 授权，于资源提供商的 认证服务器 申请令牌，于资源提供商的 资源服务器 验证令牌，访问受限资源  
+认证服务器： 验证用户信息，生成token   
+资源服务器： 分离请求中的 token ，校验 token ，访问受限资源       
+#### 使用oauth2保护你的应用，可以分为简易的分为三个步骤:  
 配置资源服务器  
 配置认证服务器  
 配置spring security  
