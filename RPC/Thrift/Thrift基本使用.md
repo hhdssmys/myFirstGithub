@@ -81,9 +81,10 @@
  
 ### Thrift支持的数据传输格式、数据传输方式和服务模型
 #### 协议（传输格式）
+Thrift可以让用户选择客户端与服务端之间传输通信协议的类别，在传输协议上<B>总体划分为文本(text)和二进制(binary)传输协议</B>。为节约带宽，提高传输效率，一般情况下使用二进制类型的传输协议为多数，有时还会使用基于文本类型的协议，这需要根据项目/产品中的实际需求。常用协议有以下几种：  
  >+ TBinaryProtocol： 二进制格式；
  >+ TCompactProtocol：高效率的、密集的二进制编码格式进行数据传输；
- >+ TJSONProtocol：JSON格式；
+ >+ TJSONProtocol：JSON文本格式；
  >+ TSimpleJSONProtocol：提供JSON只写协议, 生成的文件很容易通过脚本语言解析；
  >+ TDebugProtocol：使用易懂的可读的文本格式，以便于debug。
 #### 传输层（数据传输方式）
@@ -94,11 +95,28 @@
  >+ TZlibTransport：使用zlib进行压缩， 与其他传输方式联合使用。当前无java实现。
  >+ TNonblockingTransport —— 使用非阻塞方式，用于构建异步客户端
 #### 服务模型
- >+ TSimpleServer：单线程服务器端使用标准的阻塞式 I/O，简单的单线程服务模型，常用于测试；
- >+ TThreadPoolServer：多线程服务模型，使用标准的阻塞式IO；
- >+ TNonblockingServer：多线程服务模型，使用非阻塞式IO（需使用TFramedTransport数据传输方式）。
+ >+ TSimpleServer：单线程 服务器端使用标准的 阻塞式 I/O，简单的单线程服务模型，常用于测试；
+ >+ TThreadPoolServer：多线程 服务模型，使用标准的 阻塞式IO；
+ >+ TNonblockingServer：多线程 服务模型，使用 非阻塞式IO（需使用TFramedTransport数据传输方式）。
+ >+ THsHaServer：半同步半异步 服务器端，基于 非阻塞式IO 读写和多线程工作任务处理
+ >+ TThreadedSelectorServer：多线程 选择器服务器端，对THsHaServer在 异步IO 模型上进行增强
+
+#### [Thrift 概述与入门](https://juejin.im/post/5b290dbf6fb9a00e5c5f7aaa)
  
- 
+### 分层  
+Thrift软件栈分层从下向上分别为：传输层(Transport Layer)、协议层(Protocol Layer)、处理层(Processor Layer)和服务层(Server Layer)。  
+1. 传输层(Transport Layer)：传输层负责直接从网络中读取和写入数据，它定义了具体的网络传输协议；比如说TCP/IP传输等。
+2. 协议层(Protocol Layer)：协议层定义了数据传输格式，负责网络传输数据的序列化和反序列化；比如说JSON、XML、二进制数据等。
+3. 处理层(Processor Layer)：处理层是由具体的IDL（接口描述语言）生成的，封装了具体的底层网络传输和序列化方式，并委托给用户实现的Handler进行处理。
+4. 服务层(Server Layer)：整合上述组件，提供具体的网络线程/IO服务模型，形成最终的服务。  
+
+### 编译后文件  
+对于开发人员而言，使用原生的Thrift框架，仅需要关注以下四个核心内部接口/类：Iface, AsyncIface, Client和AsyncClient。  
+1. Iface：服务端通过实现HelloWorldService.Iface接口，向客户端的提供具体的同步业务逻辑。
+2. AsyncIface：服务端通过实现HelloWorldService.Iface接口，向客户端的提供具体的异步业务逻辑。
+3. Client：客户端通过HelloWorldService.Client的实例对象，以同步的方式访问服务端提供的服务方法。
+4. AsyncClient：客户端通过HelloWorldService.AsyncClient的实例对象，以异步的方式访问服务端提供的服务方法。
+
  
  
  
