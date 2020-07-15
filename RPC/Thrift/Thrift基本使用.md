@@ -4,7 +4,9 @@
 2. Thrift Type  
 3. 数据传输格式（协议），传输方式（阻塞，非阻塞），服务模型（单线程阻塞，多线程阻塞等）  
 4. 使用：编译 IDL 后，RPC服务提供：具体实现+服务暴露server；RPC服务消费：客户端 client 调用  
-<hr />  
+<hr />   
+  
+###  [IDL官网地址](http://thrift.apache.org/docs/idl)   
   
 ### Thrift Type  
 1. 基本类型（Base Types）  
@@ -101,7 +103,7 @@ Thrift可以让用户选择客户端与服务端之间传输通信协议的类�
  >+ THsHaServer：半同步半异步 服务器端，基于 非阻塞式IO 读写和多线程工作任务处理
  >+ TThreadedSelectorServer：多线程 选择器服务器端，对THsHaServer在 异步IO 模型上进行增强
 
-#### [Thrift 概述与入门](https://juejin.im/post/5b290dbf6fb9a00e5c5f7aaa)
+### [Thrift 概述与入门](https://juejin.im/post/5b290dbf6fb9a00e5c5f7aaa)
  
 ### 分层  
 Thrift软件栈分层从下向上分别为：传输层(Transport Layer)、协议层(Protocol Layer)、处理层(Processor Layer)和服务层(Server Layer)。  
