@@ -96,12 +96,12 @@ Thrift可以让用户选择客户端与服务端之间传输通信协议的类�
  >+ TMemoryTransport：将内存用于I/O. java实现时内部实际使用了简单的ByteArrayOutputStream。
  >+ TZlibTransport：使用zlib进行压缩， 与其他传输方式联合使用。当前无java实现。
  >+ TNonblockingTransport —— 使用非阻塞方式，用于构建异步客户端
-#### 服务模型
- >+ TSimpleServer：单线程 服务器端使用标准的 阻塞式 I/O，简单的单线程服务模型，常用于测试；
- >+ TThreadPoolServer：多线程 服务模型，使用标准的 阻塞式IO；
- >+ TNonblockingServer：多线程 服务模型，使用 非阻塞式IO（需使用TFramedTransport数据传输方式）。
- >+ THsHaServer：半同步半异步 服务器端，基于 非阻塞式IO 读写和多线程工作任务处理
- >+ TThreadedSelectorServer：多线程 选择器服务器端，对THsHaServer在 异步IO 模型上进行增强
+#### 服务模型 （参考于 [ Thrift 网络服务模型](https://juejin.im/post/5b290e225188252d9548fe15#heading-2) ）
+ >+ TSimpleServer：单线程 服务器端使用标准的 阻塞式 I/O，简单的单线程服务模型，常用于测试；【 BIO 单线程 一个线程所有请求 】
+ >+ TThreadPoolServer：多线程 服务模型，使用标准的 阻塞式IO；【 BIO 多线程 一个线程处理监听 线程池处理业务 】
+ >+ TNonblockingServer：单线程 服务模型，使用 非阻塞式IO（需使用TFramedTransport数据传输方式）。【 NIO 单线程 IO多路复用 一个线程处理已注册事件 】
+ >+ THsHaServer（继承于TNonblockingServer）：半同步半异步 服务器端，基于 非阻塞式IO 读写和多线程工作任务处理（THsHaServer和TNonblockingServer一样，要求底层的传输通道必须使用TFramedTransport）【 NIO 多线程 一个线程取出注册事件 线程池处理提交的注册事件 】
+ >+ TThreadedSelectorServer：多线程 选择器服务器端，对 THsHaServer在 异步IO 模型上进行增强（将selector中的读写IO事件(read/write)从主线程中分离出来。同时引入worker工作线程池）【 NIO 多线程 一个监听线程 多个读写线程 一个匹配线程，匹配监听Socket与读写线程 工作线程池 】
 
 ### [Thrift 概述与入门](https://juejin.im/post/5b290dbf6fb9a00e5c5f7aaa)
  
