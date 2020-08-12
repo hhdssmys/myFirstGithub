@@ -16,7 +16,7 @@
  >+ i32: 32位有符号整数（A 32-bit signed integer）；  
  >+ i64: 64位有符号整数（A 64-bit signed integer）；  
  >+ double: 64位浮点数（A 64-bit floating point number）；  
- >+ binary: byte数组（A byte array）；  
+ >+ binary: byte数组（A byte array）；经实践，其对应的Java类型是java.nio.ByteBuffer      
  >+ string: 字符串（Encoding agnostic text or binary string）   
  > #### Thrift 不支持无符号整数，因为有些语言也不支持无符号整数，比如Java
 2. 容器类型（Containers）   
