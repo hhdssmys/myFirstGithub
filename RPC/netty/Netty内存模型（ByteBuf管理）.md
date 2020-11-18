@@ -24,6 +24,14 @@
 >- 算法从根节点开始遍历,需要在depth = d的层级中找到第一块空闲内存
 >+ 内存释放：因为算法是从上往下开始遍历，所以在实际处理中，节点分配内存后仅更新祖先节点的值，并没有更新子节点的值；释放内存时，根据申请内存返回的id，将 memoryMap[id]更新为depth_of_id，同时设置id节点的祖先节点值为各自左右节点的最小值  
 
+#### 内存池分配流程
+> 1. ByteBufAllocator 准备申请一块内存,尝试从PoolThreadCache中获取可用内存，如果成功则完成此次分配，否则继续往下走，注意后面的内存分配都会加锁
+> 2. 如果是小块（可配置该值）内存分配，则尝试从PoolArena中缓存的PoolSubpage中获取内存，如果成功则完成此次分配 
+> 3. 如果是普通大小的内存分配，则从PoolChunkList中查找可用PoolChunk并进行内存分配，如果没有可用的PoolChunk则创建一个并加入到PoolChunkList中，完成此次内存分配
+> 4. 如果是大块（大于一个chunk的大小）内存分配，则直接分配内存而不用内存池的方式；
+> 5. 内存使用完成后进行释放，释放的时候首先判断是否和分配的时候是同一个线程，如果是则尝试将其放入PoolThreadCache，这块内存将会在下一次同一个线程申请内存时使用，即前面的步骤2
+> 6. 如果不是同一个线程，则回收至chunk中，此时chunk中的内存使用率会发生变化，可能导致该chunk在不同的PoolChunkList中移动，或者整个chunk回收（chunk在q000上，且其分配的所有内存被释放）；同时如果释放的是小块内存（与步骤3中描述的内存相同），会尝试将小块内存前置到PoolArena中，这里操作成功了，步骤3的操作中才可能成功
+
 #### 弹性伸缩 PoolArena（如何管理多个chunk，构建成能够弹性伸缩内存池）
 >1. PoolArena 内部持有6个 PoolChunkList，各个PoolChunkList持有的PoolChunk的使用率区间不同,按顺序依次访问q050、q025、q000、qInit、q075,这样做的好处是，使分配后各个区间内存使用率更多处于[75,100)的区间范围内，提高PoolChunk内存使用率的同时也兼顾效率，减少在PoolChunkList中PoolChunk的遍历  
 >2. PoolArena内部持有2个PoolSubpage数组，分别存储tiny和small规格类型的PoolSubpage,这些小对象直接分配一个page会造成浪费，在page中进行平衡树的标记又额外消耗更多空间，因此Netty的实现是：先PoolChunk中申请空闲page，同一个page分为相同大小规格的小内存进行存储,即poolSubpage 存储大小相同的块    
