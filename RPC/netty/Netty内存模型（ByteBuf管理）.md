@@ -1,4 +1,5 @@
 ### [转载于  Netty - 内存模型原理 (ByteBuf管理)](https://juejin.im/post/6844904158772887559)
+  [Netty内存模型-PoolArena](https://www.jianshu.com/p/8468b49785e6)
 #### ByteBuf 分类
 1. Netty 使用 ByteBuf 对象作为数据容器，进行 I/O 读写操作，Netty 的内存管理也是围绕着 ByteBuf 对象高效地分配和释放
 >+ Unpooled，非池化内存每次分配时<B>直接调用系统 API</B> 向操作系统申请ByteBuf需要的同样大小内存，用完后通过<B>系统调用进行释放</B>
