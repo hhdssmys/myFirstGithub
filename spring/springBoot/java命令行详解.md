@@ -11,7 +11,7 @@
 >1. options 由空格分隔的命令行选项  
 >2. mainclass 待启动类包含包路径的类全名，其中需要含有main()方法  
 >3. jarfile 待启动jar包的路径，其中需要manifest文件指明含有main()方法的启动类
->4. args 传给启动类main()方法的参数，由空格分隔  
+>4. args 传给启动类main()方法的参数，由空格分隔，例如 paramA paramB    
 
 ### 命令行详解
 #### 选项详解，命令行选项分为三类
