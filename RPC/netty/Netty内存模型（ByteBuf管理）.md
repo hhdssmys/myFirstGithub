@@ -20,7 +20,7 @@
 
 #### 平台对象内存申请（PoolChunk 内存分配 ）
 >+ 算法结构： 完全二叉树，叶子节点是 page
->- 存储标识： byte数组(memoryMap)，初始值 memoryMap[id] = depth_of_id，标识 id节点空闲；memoryMap[id] = maxDepth + 1：id节点全部已使用，depth_of_id < memoryMap[id] < maxOrder + 1：id节点部分已使用  
+>- 存储标识： byte数组(memoryMap)，初始值 memoryMap[id] = depth_of_id，标识 id节点空闲；memoryMap[id] = maxDepth + 1：id节点全部已使用，depth_of_id < memoryMap[id] < maxDepth + 1：id节点部分已使用  
 >+ 内存大小归一化(向上取值): normalizeCapacity = chunkSize/2^d，拿 d 和 memoryMap[id]比较
 >- 算法从根节点开始遍历,需要在depth = d的层级中找到第一块空闲内存
 >+ 内存释放：因为算法是从上往下开始遍历，所以在实际处理中，节点分配内存后仅更新祖先节点的值，并没有更新子节点的值；释放内存时，根据申请内存返回的id，将 memoryMap[id]更新为depth_of_id，同时设置id节点的祖先节点值为各自左右节点的最小值  
